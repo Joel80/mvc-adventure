@@ -2,6 +2,10 @@ index:
     path: /
     controller: App\Controller\DefaultController::index
 
+app_adventure_setup:
+    path: /adventure/setup
+    controller: App\Controller\AdventureController::setup
+    methods: post
 app_adventure_play_game:
     path: /adventure/play
     controller: App\Controller\AdventureController::playGame
@@ -19,4 +23,9 @@ app_adventure_pick:
 app_adventure_use_item:
     path: /adventure/use
     controller: App\Controller\AdventureController::useItem
+    methods: post
+
+app_adventure_end_game:
+    path: /adventure/end
+    controller: App\Controller\AdventureController::endGame
     methods: post
