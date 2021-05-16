@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events{% endblock %}
+
+{% block body %}
+<h2>Your acomplishments</h2>
+{% for event in events %}
+    <ul>
+        <li>{{ event.description}}</li>
+    </ul>
+{% endfor %}
+{% endblock %}

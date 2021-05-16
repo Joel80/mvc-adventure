@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet"/>
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+            <script type="text/javascript" src="{{ asset('js/main.js')}}"></script>
+        {% endblock %}
+    </head>
+    <body>
+        {% block header %}
+            <header class="site-header">
+                <div class="site-title">
+                    <h1>Framework - ORM</h1>
+                </div>
+            </header>
+         {% endblock %}
+            <main class = "main">
+            <nav>
+                <a href="{{ path('index') }}">Home</a>
+                <a href="{{ path('app_adventure_play_game') }}">Adventure game</a>
+                <a href="{{ path('app_find_all_log') }}">Adventure logs</a>
+            </nav>
+        {% block body %}{% endblock %}
+        </main>
+    </body>
+</html>

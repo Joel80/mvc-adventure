@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<h2>Adventure</h2>
+
+<p>{{data['playerRoomDescription']}}</p>
+
+{% for description in data['playerRoomTempDescriptions']%}
+    <p>{{description}}</p>
+{% endfor %}
+
+{% for item in data['playerRoomItems']%}
+    <form method="post" action="{{ path('app_adventure_pick')}}">
+        <input type="text" name="itemPlacementDescription" value="{{item['placementDescription']}}" readonly>
+        <input type="hidden" name="itemId" value="{{item['id']}}" readonly>
+        <input type="submit" name="doit" value="Pick up">
+    </form>
+{% endfor %}
+
+
+{% if data['playerRoomIndex'] == 'roomFive'%}
+    <form method="post" action="{{ path('app_adventure_use_item')}}">
+        <input type="text" name="keypad" value="Enter code on keypad" readonly>
+        <input type="text" name="itemId">
+        <input type="hidden" name="roomIndex" value="{{data['playerRoomIndex']}}">
+        <input type="submit" name="doit" value="Enter">
+    </form>
+{% endif %}
+
+{% for exitName, roomIndex in data['playerRoomExits']%}
+    <form method="post" action="{{ path('app_adventure_move')}}">
+        <input type="text" name="exitName" value="{{exitName}}" readonly>
+        <input type="hidden" name="roomIndex" value="{{roomIndex}}" readonly>
+        <input type="submit" name="doit" value="Go">
+    </form>
+{% endfor %}
+
+<p>Player Inventory</p>
+{% for item in data['playerItems']%}
+    <form method="post" action="{{ path('app_adventure_use_item')}}">
+        <input type="text" name="itemName" value="{{item['name']}}" readonly>
+        <input type="hidden" name="itemId" value="{{item['id']}}" readonly>
+        <input type="hidden" name="roomIndex" value="{{data['playerRoomIndex']}}">
+        <input type="submit" name="doit" value="Use">
+    </form>
+{% endfor %}
+
+{% if data['playerRoomIndex'] == 'roomSix'%}
+    <form method="post" action="{{ path('app_adventure_end_game')}}">
+        <input type="submit" name="doit" value="End game">
+    </form>
+{% endif %}
+
+<!-- {{dump(data['playerRoomDescription'])}}
+
+{{dump(data['playerRoomIndex'])}}
+
+
+{{dump(data['playerRoomExits'])}}
+
+{{dump(data['playerRoomItems'])}}
+
+{{dump(data['playerItems'])}}
+
+{{dump(data['playerRoomTempDescriptions'])}} -->
+
+{% endblock %}
