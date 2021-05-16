@@ -73,6 +73,24 @@ class AdventureManager
         $this->data->setPlayerRoomDescriptionData($roomDescription);
     }
 
+    public function setCurrentPlayerRoomImageData(): void
+    {
+        $room = $this->player->getCurrentRoom();
+
+        $roomImage = $room->getRoomImageUrl();
+
+        $this->data->setPlayerRoomImageData($roomImage);
+    }
+
+    public function setCurrentPlayerRoomNameData(): void
+    {
+        $room = $this->player->getCurrentRoom();
+
+        $roomName = $room->getRoomName();
+
+        $this->data->setPlayerRoomNameData($roomName);
+    }
+
     public function setCurrentPlayerRoomExitsData(): void
     {
         $exitsData = [];
@@ -161,13 +179,13 @@ class AdventureManager
 
     }
 
-    public function setPlayerRoomIndexData()
+    public function setCurrentPlayerRoomIndexData()
     {
         $currentRoomIndex = $this->getCurrentPlayerRoom()->getRoomIndex();
         $this->data->setPlayerRoomIndexData($currentRoomIndex);
     }
 
-    public function setPlayerRoomTempDescriptionsData()
+    public function setCurrentPlayerRoomTempDescriptionsData()
     {
         
        $tempDescriptions = $this->getCurrentPlayerRoom()->getTempDescriptions();

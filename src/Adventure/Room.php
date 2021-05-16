@@ -21,13 +21,17 @@ class Room
     private Inventory $inventory;
     private array $exits;
     private string $roomIndex;
+    private string $imageUrl;
+    private string $name;
 
-    public function __construct(string $description, string $roomIndex)
+    public function __construct(string $description, string $roomIndex, string $imageUrl, string $name)
     {
         $this->description = $description;
         $this->tempDescriptions = [];
         $this->roomIndex = $roomIndex;
         $this->exits = [];
+        $this->imageUrl = $imageUrl;
+        $this->name = $name;
     }
 
     public function getDescription(): string
@@ -83,5 +87,25 @@ class Room
     public function getRoomIndex(): string
     {
         return $this->roomIndex;
+    }
+
+    public function setRoomImageUrl(string $imageUrl): void
+    {
+        $this->imageUrl = $imageUrl;
+    }
+
+    public function getRoomImageUrl(): string
+    {
+        return $this->imageUrl;
+    }
+
+    public function setRoomName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getRoomName(): string
+    {
+        return $this->name;
     }
 }

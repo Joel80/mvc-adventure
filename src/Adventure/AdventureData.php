@@ -19,6 +19,16 @@ class AdventureData
         $this->data['playerRoomDescription'] = $description;
     }
 
+    public function setPlayerRoomImageData(string $roomImage): void
+    {
+        $this->data['playerRoomImage'] = $roomImage;
+    }
+
+    public function setPlayerRoomNameData(string $roomName): void
+    {
+        $this->data['playerRoomName'] = $roomName;
+    }
+
     public function setPlayerRoomExitsNameData(array $exitNames): void
     {
         $this->data['playerRoomExitNameData'] = $exitNames;
