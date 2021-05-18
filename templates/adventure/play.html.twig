@@ -1,68 +1,73 @@
 {% extends 'base.html.twig' %}
+{% block title %}Escape from Vault{% endblock %}
 {% block body %}
-<h2>{{data['playerRoomName']}}</h2>
 
-<p>{{data['playerRoomImage']}}</p>
+<div class="game-grid">
+    <h2 id="focus" class="game-heading">{{data['playerRoomName']}}</h2>
+    <div class="room-image">
+        <img class="game-image" src= "{{ asset(data['playerRoomImage']) }}"/>
+    </div>
 
-<p>{{data['playerRoomDescription']}}</p>
+    <div class="room-description">
+        {{data['playerRoomDescription']}}
+        
+        {% if data['playerRoomIndex'] == 'roomFive'%}
+            <form method="post" action="{{ path('app_adventure_use_item')}}">
+                <!-- <input type="text" name="keypad" value="Enter code on keypad" readonly> -->
+                <label for="keypad" >Enter code on keypad</label>
+                <input type="text" name="itemId">
+                <input type="hidden" name="roomIndex" value="{{data['playerRoomIndex']}}">
+                <input type="submit" name="doit" value="Enter">
+            </form>
+        {% endif %}
 
-{% for description in data['playerRoomTempDescriptions']%}
-    <p>{{description}}</p>
-{% endfor %}
+        {% if data['playerRoomIndex'] == 'roomSix'%}
+            <form class="end-game-form" method="post" action="{{ path('app_adventure_end_game')}}">
+                <input type="submit" name="doit" value="End game">
+            </form>
+        {% endif %}
 
-{% for item in data['playerRoomItems']%}
-    <form method="post" action="{{ path('app_adventure_pick')}}">
-        <input type="text" name="itemPlacementDescription" value="{{item['placementDescription']}}" readonly>
-        <input type="hidden" name="itemId" value="{{item['id']}}" readonly>
-        <input type="submit" name="doit" value="Pick up">
-    </form>
-{% endfor %}
+        {% for item in data['playerRoomItems']%}
+            <form method="post" action="{{ path('app_adventure_pick')}}">
+                <!-- <input type="text" name="itemPlacementDescription" value="{{item['placementDescription']}}" readonly> -->
+                <label for="itemPlacementDescription" >{{item['placementDescription']}}</label>
+                <input type="hidden" name="itemId" value="{{item['id']}}" readonly>
+                <input type="submit" name="doit" value="Pick up">
+            </form>
+        {% endfor %}
 
+        {% for exitName, roomIndex in data['playerRoomExits']%}
+            <form class="exit-form" method="post" action="{{ path('app_adventure_move')}}">
+                <!-- <input type="text" name="exitName" value="{{exitName}}" readonly> -->
+                <label for="exitName" >{{exitName}}</label>
+                <input type="hidden" name="roomIndex" value="{{roomIndex}}" readonly><br>
+                <input class="exit-button" type="submit" name="doit" value="Go">
+            </form>
+        {% endfor %}
+    </div>
 
-{% if data['playerRoomIndex'] == 'roomFive'%}
-    <form method="post" action="{{ path('app_adventure_use_item')}}">
-        <input type="text" name="keypad" value="Enter code on keypad" readonly>
-        <input type="text" name="itemId">
-        <input type="hidden" name="roomIndex" value="{{data['playerRoomIndex']}}">
-        <input type="submit" name="doit" value="Enter">
-    </form>
-{% endif %}
+  
+        
+   
 
-{% for exitName, roomIndex in data['playerRoomExits']%}
-    <form method="post" action="{{ path('app_adventure_move')}}">
-        <input type="text" name="exitName" value="{{exitName}}" readonly>
-        <input type="hidden" name="roomIndex" value="{{roomIndex}}" readonly>
-        <input type="submit" name="doit" value="Go">
-    </form>
-{% endfor %}
+    <div class="player-inventory">
+    <p>Player Inventory</p>
+    {% for item in data['playerItems']%}
+        <form method="post" action="{{ path('app_adventure_use_item')}}">
+            <!-- <input type="text" name="itemName" value="{{item['name']}}" readonly> -->
+            <label for="itemName" >{{item['name']}}</label>
+            <input type="hidden" name="itemId" value="{{item['id']}}" readonly>
+            <input type="hidden" name="roomIndex" value="{{data['playerRoomIndex']}}"><br>
+            <input class="use-item" type="submit" name="doit" value="Use">
+        </form>
+    {% endfor %}
+    </div>
 
-<p>Player Inventory</p>
-{% for item in data['playerItems']%}
-    <form method="post" action="{{ path('app_adventure_use_item')}}">
-        <input type="text" name="itemName" value="{{item['name']}}" readonly>
-        <input type="hidden" name="itemId" value="{{item['id']}}" readonly>
-        <input type="hidden" name="roomIndex" value="{{data['playerRoomIndex']}}">
-        <input type="submit" name="doit" value="Use">
-    </form>
-{% endfor %}
-
-{% if data['playerRoomIndex'] == 'roomSix'%}
-    <form method="post" action="{{ path('app_adventure_end_game')}}">
-        <input type="submit" name="doit" value="End game">
-    </form>
-{% endif %}
-
-<!-- {{dump(data['playerRoomDescription'])}}
-
-{{dump(data['playerRoomIndex'])}}
-
-
-{{dump(data['playerRoomExits'])}}
-
-{{dump(data['playerRoomItems'])}}
-
-{{dump(data['playerItems'])}}
-
-{{dump(data['playerRoomTempDescriptions'])}} -->
-
+    <div class="events">
+        <p>Events</p>
+        {% for description in data['playerRoomTempDescriptions']%}
+            <p>{{description}}</p>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

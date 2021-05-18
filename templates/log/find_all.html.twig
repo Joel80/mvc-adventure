@@ -3,18 +3,19 @@
 {% block title %}Adventure logs{% endblock %}
 
 {% block body %}
-<h2>Adventure logs</h2>
-<table class="high-score-table">
-    <tr>
-        <th>Log number</th>
-        <th>Date</th>
-        <th>Show events</th>
-    </tr>
-    {% for log in logs %}
+    <h2>Adventure logs</h2>
+    <table class="log-table">
         <tr>
-           <td>{{log.id}}</td>
-            <td>{{ log.date|date('Y-m-d')}}</td>
-            <td><a href="{{ path('app_show_events',  {'id': log.id}) }}">Show events</a></td>
+            <th>Log number</th>
+            <th>Date</th>
+            <th>Show events</th>
         </tr>
-    {% endfor %}
+        {% for log in logs %}
+            <tr>
+            <td>{{log.id}}</td>
+                <td>{{ log.date|date('Y-m-d')}}</td>
+                <td><a href="{{ path('app_show_events',  {'id': log.id}) }}">Show events</a></td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
