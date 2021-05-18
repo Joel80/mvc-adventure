@@ -148,9 +148,9 @@ class AdventureController extends AbstractController
     {
         $map = new Map();
             
-        $room2 = new Room("This room is lit in a steady red emergency light. Dust covers the floor.
+        $room2 = new Room("This hallway is lit only by the flashing red light from the room to the south. Dust covers the floor.
         Water drips from the ceiling high above and forms a small pool in the middle of the floor.
-        There is an exit to the south and an exit to the east.", "roomTwo", "img/room2.jpg", "The second room");
+        There is an exit to the south and an exit to the east.", "roomTwo", "img/room2.jpg", "The Hallway");
 
         $room2Inventory = new Inventory();
 
@@ -160,10 +160,11 @@ class AdventureController extends AbstractController
 
         $room2->setInventory($room2Inventory);
 
-        $room1 = new Room("You are in in a room filled with debris. Desks and overturned chairs litter the room. 
+        $room1 = new Room("You are in in a room filled with debris. Beds, desks and overturned chairs litter the room. 
         Severed cables hangs from the ceiling. Red flashing emergency light fills the room and you can see a small 
         locker in one corner of the room. The locker door is slightly ajar but seems jammed. To the north is a great 
-        door it is shut and seems impossible to open by force. There is a small slot next to the door.", "roomOne", "img/room1.jpg", "The first room");
+        door it is shut and seems impossible to open by force. On the floor beneath the door lies a fallen exit sign.
+        There is a small slot next to the door.", "roomOne", "img/room1.jpg", "The Safe Room");
 
         $room1Inventory = new Inventory();
 
@@ -177,9 +178,9 @@ class AdventureController extends AbstractController
 
         $room3 = new Room("This room seems to get it's power from another power source. It is dark but a small computer on
         a desk in the corner seems to be working. The screen flashes: 'Authorization needed.' There is an exit to the west, 
-        an exit to the east and an exit to the north", "roomThree", "img/room3.jpg", "The third room");
+        an exit to the east and an exit to the north", "roomThree", "img/room3.jpg", "The Surveilance Room");
 
-        $room4 = new Room("This room resembles the first room: desks, overturned chairs and yellowed paper litters the floor. There is an exit to the west.", "roomFour", "img/room4.jpg", "The fourth room");
+        $room4 = new Room("This room - maybe it was a canteen once? You can't remember but there are many tables and chairs here among the debris. There is an exit to the west.", "roomFour", "img/room4.jpg", "The Canteen");
 
         $calculator = new Item("A broken calculator", "Broken calculator - the seven seems to be missing", "calculator", "A broken calculator lies on the floor.");
 
@@ -190,7 +191,7 @@ class AdventureController extends AbstractController
         $room4->setInventory($room4Inventory);
 
         $room5 = new Room("The power seems to be working in this this great hall. It basks in flickering yellow light. The room is dominated by
-        a large vault door on the northern wall. Next to the door is a keypad. There is an exit to the south.", "roomFive", "img/room5.jpg", "The fifth room");
+        a large vault door on the northern wall. Next to the door is a keypad. There is an exit to the south.", "roomFive", "img/room5.jpg", "The Vault Exit");
 
         $dirtyCloth = new Item("Dirty cloth rag", "Dirty cloth rag", "dirtyClothRag", "A dirty cloth rag hangs on the wall next to the southern exit.");
 
