@@ -7,3 +7,5 @@ function disableSides()
 {
     document.getElementById("sides").disabled = true;
 }
+
+window.location.hash = '#focus';
