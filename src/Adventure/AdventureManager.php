@@ -280,17 +280,17 @@ class AdventureManager
 
             $this
                 ->getRoomFromMap("roomOne")
-                ->setDescription("You are in in a room filled with debris. Desks, and overturned chairs litter the room. 
-                Sewered cables hangs from the ceiling. Red flashing emergency light fills the room and you can see a small 
-                locker in one corner of the room. The locker door is slightly ajar but seems jammed. The door to the north is open");
+                ->setDescription("You are in in a room filled with debris. Beds, desks, and overturned chairs litter the room. 
+                Severed cables hangs from the ceiling. Red flashing emergency light fills the room and you can see a small 
+                locker in one corner of the room. The locker door is slightly ajar but seems jammed.  A fallen exit sign lies on the floor. The door to the north is open");
             
             $this
                 ->getRoomFromMap("roomOne")
-                ->addTempDescription("You use the ID card and the giant door swings open");
+                ->addTempDescription("You put the ID card in the slot by the door and the giant door swings open");
 
             $event = new Event();
 
-            $event->setDescription("You opened the door in the first room");
+            $event->setDescription("You opened the door in the Safe Room");
 
             $this->setLastEvent($event);
 
@@ -302,7 +302,7 @@ class AdventureManager
         if ($itemId == "ironBar" && $roomIndex == "roomOne" && !$this->event2)
         {
             $room = $this->getRoomFromMap("roomTwo");
-            $exit = new RoomExit($room, "North Exit");
+            $exit = new RoomExit($room, "Northern Exit");
 
             $this
                 ->getRoomFromMap("roomOne")
@@ -310,10 +310,10 @@ class AdventureManager
 
             $this
                 ->getRoomFromMap("roomOne")
-                ->setDescription("You are in in a room filled with debris. Desks, and overturned chairs litter the room.
+                ->setDescription("You are in in a room filled with debris. Beds, desks and overturned chairs litter the room. 
                 Severed cables hangs from the ceiling. Red flashing emergency light fills the room and you can see a small
                 locker in one corner of the room. The locker door is open and you can see the number '1' drawn on the wall inside.
-                The door to the north is open");
+                A fallen exit sign lies on the floor.The door to the north is open");
             
             $this
                 ->getRoomFromMap("roomOne")
@@ -322,7 +322,7 @@ class AdventureManager
 
             $event = new Event();
 
-            $event->setDescription("You opened the locker in the first room");
+            $event->setDescription("You opened the locker in the Safe Room");
 
             $this->setLastEvent($event);
 
@@ -335,7 +335,7 @@ class AdventureManager
         {
             $this
                 ->getRoomFromMap("roomTwo")
-                ->setDescription("This room is lit in a steady red emergency light. Dust covers the floor.
+                ->setDescription("This hallway is lit only by the flashing red light from the room to the south. Dust covers the floor.
                 Someone has etched a '3' in the middle of the floor. There is an exit to the south and an exit to the east.");
             
             $this
@@ -346,7 +346,7 @@ class AdventureManager
 
             $event = new Event();
 
-            $event->setDescription("You removed the water in the second room");
+            $event->setDescription("You removed the water in the Hallway");
 
             $this->setLastEvent($event);
 
@@ -370,7 +370,7 @@ class AdventureManager
 
             $event = new Event();
 
-            $event->setDescription("You turned on the computer in the third room");
+            $event->setDescription("You turned on the computer in the Surveilance Room");
 
             $this->setLastEvent($event);
             $this->setEvent4(true);
