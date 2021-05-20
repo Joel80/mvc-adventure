@@ -2,7 +2,7 @@
     "name": "jolf20/mvc-framework",
     "description": "A part of the course dbwebb/mvc, the framework. My solutions",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
