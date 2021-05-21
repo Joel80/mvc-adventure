@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\EventRepository;
+use App\Repository\AchievementRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=EventRepository::class)
+ * @ORM\Entity(repositoryClass=AchievementRepository::class)
  */
-class Event
+class Achievement
 {
     /**
      * @ORM\Id
@@ -23,9 +23,9 @@ class Event
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Log::class, inversedBy="events")
+     * @ORM\ManyToOne(targetEntity=AchievementLog::class, inversedBy="achievements")
      */
-    private $log;
+    private $achievementLog;
 
     public function getId(): ?int
     {
@@ -44,15 +44,15 @@ class Event
         return $this;
     }
 
-   /*  public function getLog(): ?Log
+  /*   public function getAchievementLog(): ?AchievementLog
     {
-        return $this->log;
-    }
-*/
-    public function setLog(?Log $log): self
+        return $this->achievementLog;
+    } */
+
+    public function setAchievementLog(?AchievementLog $achievementLog): self
     {
-        $this->log = $log;
+        $this->achievementLog = $achievementLog;
 
         return $this;
-    } 
+    }
 }
