@@ -11,7 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Adventure\AdventureSetup;
 use App\Entity\RoomDescriptor;
-use App\Entity\Log;
+/* use App\Entity\Log; */
+use App\Entity\AchievementLog;
+use App\Entity\ItemDescriptor;
+use App\Entity\ExitDescriptor;
 
 
 class AdventureController extends AbstractController
@@ -38,28 +41,28 @@ class AdventureController extends AbstractController
             );
         }
 
-        $lastEvent = $adventureManager
+        $lastAchievement = $adventureManager
             ->getAdventureEventManager()
-            ->getLastEvent()
+            ->getLastAchievement()
         ;
 
-        if($lastEvent) {
+        if($lastAchievement) {
 
             $entityManager = $this->getDoctrine()->getManager();
 
-            $logId = $adventureManager->getLog()->getId();
+            $logId = $adventureManager->getAchievementLog()->getId();
 
-            $log = $entityManager->getReference('App\Entity\Log', $logId);
+            $log = $entityManager->getReference('App\Entity\AchievementLog', $logId);
 
-            $lastEvent->setLog($log);
+            $lastAchievement->setAchievementLog($log);
 
-            $entityManager->persist($lastEvent);
+            $entityManager->persist($lastAchievement);
 
             $entityManager->flush();
 
             $adventureManager
                 ->getAdventureEventManager()
-                ->setLastEvent(null)
+                ->setLastAchievement(null)
             ;
         }
 
@@ -166,7 +169,7 @@ class AdventureController extends AbstractController
     public function setup()
     {
         //Create log and set date
-        $adventureLog = new Log();
+        $adventureLog = new AchievementLog();
 
         $adventureLog->setDate(new \DateTime());
 
@@ -180,9 +183,19 @@ class AdventureController extends AbstractController
         ->getRepository(RoomDescriptor::class)
         ->findAll();
 
+        //Get the item descriptors from the database
+        $itemDescriptors = $entityManager
+        ->getRepository(ItemDescriptor::class)
+        ->findAll();
+
+        //Get the exit descriptors from the database
+        $exitDescriptors = $entityManager
+        ->getRepository(ExitDescriptor::class)
+        ->findAll();
+
         $setup = new AdventureSetup();
 
-        $adventureManager = $setup->setup($adventureLog, $roomDescriptors);
+        $adventureManager = $setup->setup($adventureLog, $roomDescriptors, $itemDescriptors, $exitDescriptors);
 
         $this->session->set('manager', $adventureManager);
 

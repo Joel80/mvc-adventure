@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210519172445 extends AbstractMigration
+final class Version20210520212751 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,14 +20,13 @@ final class Version20210519172445 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE TABLE achievement (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, achievement_log_id INTEGER DEFAULT NULL, description VARCHAR(255) NOT NULL)');
+        $this->addSql('CREATE INDEX IDX_96737FF1D70101B ON achievement (achievement_log_id)');
+        $this->addSql('CREATE TABLE achievement_log (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, date DATE NOT NULL, player_name VARCHAR(255) DEFAULT NULL)');
+        $this->addSql('CREATE TABLE event_descriptor (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, event VARCHAR(255) NOT NULL, description VARCHAR(500) NOT NULL, room_description VARCHAR(2000) NOT NULL, add_exit BOOLEAN NOT NULL, exit_leads_to VARCHAR(255) DEFAULT NULL, exit_is_in_room VARCHAR(255) DEFAULT NULL, exit_name VARCHAR(255) DEFAULT NULL, event_room VARCHAR(255) NOT NULL)');
+        $this->addSql('CREATE TABLE exit_descriptor (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, leads_to_room VARCHAR(255) NOT NULL, located_in_room VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL)');
+        $this->addSql('CREATE TABLE item_descriptor (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, description VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL, item_id VARCHAR(255) NOT NULL, placement_description VARCHAR(255) NOT NULL, room_index VARCHAR(255) NOT NULL)');
         $this->addSql('CREATE TABLE room_descriptor (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, description VARCHAR(2000) NOT NULL, room_index VARCHAR(255) NOT NULL, room_image VARCHAR(255) NOT NULL, room_name VARCHAR(255) NOT NULL)');
-        $this->addSql('DROP INDEX IDX_3BAE0AA7EA675D86');
-        $this->addSql('CREATE TEMPORARY TABLE __temp__event AS SELECT id, log_id, description FROM event');
-        $this->addSql('DROP TABLE event');
-        $this->addSql('CREATE TABLE event (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, log_id INTEGER DEFAULT NULL, description VARCHAR(255) NOT NULL COLLATE BINARY, CONSTRAINT FK_3BAE0AA7EA675D86 FOREIGN KEY (log_id) REFERENCES log (id) NOT DEFERRABLE INITIALLY IMMEDIATE)');
-        $this->addSql('INSERT INTO event (id, log_id, description) SELECT id, log_id, description FROM __temp__event');
-        $this->addSql('DROP TABLE __temp__event');
-        $this->addSql('CREATE INDEX IDX_3BAE0AA7EA675D86 ON event (log_id)');
     }
 
     public function postUp(Schema $schema): void
@@ -48,13 +47,11 @@ final class Version20210519172445 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('DROP TABLE achievement');
+        $this->addSql('DROP TABLE achievement_log');
+        $this->addSql('DROP TABLE event_descriptor');
+        $this->addSql('DROP TABLE exit_descriptor');
+        $this->addSql('DROP TABLE item_descriptor');
         $this->addSql('DROP TABLE room_descriptor');
-        $this->addSql('DROP INDEX IDX_3BAE0AA7EA675D86');
-        $this->addSql('CREATE TEMPORARY TABLE __temp__event AS SELECT id, log_id, description FROM event');
-        $this->addSql('DROP TABLE event');
-        $this->addSql('CREATE TABLE event (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, log_id INTEGER DEFAULT NULL, description VARCHAR(255) NOT NULL)');
-        $this->addSql('INSERT INTO event (id, log_id, description) SELECT id, log_id, description FROM __temp__event');
-        $this->addSql('DROP TABLE __temp__event');
-        $this->addSql('CREATE INDEX IDX_3BAE0AA7EA675D86 ON event (log_id)');
     }
 }
