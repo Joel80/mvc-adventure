@@ -25,22 +25,22 @@ class Item
         $this->placementDescription = $itemPlacementDescription;
     }
 
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    public function getPlacementDescription()
+    public function getPlacementDescription(): string
     {
         return $this->placementDescription;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function getItemId()
+    public function getItemId(): string
     {
         return $this->itemId;
     }

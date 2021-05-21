@@ -19,38 +19,20 @@ class Inventory
         $this->items = [];
     }
 
-    public function getItems()
+    public function getItems(): array
     {
         return $this->items;
     }
 
-    public function addItem(Item $item, $itemId)
+    public function addItem(Item $item, $itemId): void
     {
         $this->items[$itemId] = $item;
     }
 
-    public function removeItem($itemId)
+    public function removeItem($itemId): void
     {
         unset($this->items[$itemId]);
     }
-
-    /* public function getItemDescription(Item $item): ?string
-    {
-        $key = array_search($item, $this->items);
-
-        if ($key) {
-            return $this->items[$key]->getDescription();
-        }
-    }
-
-    public function getItemName(Item $item): ?string
-    {
-        $key = array_search($item, $this->items);
-
-        if ($key) {
-            return $this->items[$key]->getName();
-        }
-    } */
 
     public function getItem($itemId): ?Item
     {

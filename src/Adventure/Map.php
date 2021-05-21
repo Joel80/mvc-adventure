@@ -12,7 +12,9 @@ class Map
     private array $map;
 
     public function __construct()
-    {}
+    {
+        $this->map = [];
+    }
 
     public function addRoom(Room $room, string $index): void
     {

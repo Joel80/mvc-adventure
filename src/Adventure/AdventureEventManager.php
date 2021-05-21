@@ -11,8 +11,6 @@ use App\Adventure\AdventureData;
 use App\Adventure\Map;
 use App\Entity\Achievement;
 use App\Entity\AchievementLog;
-/* use App\Entity\Event;
-use App\Entity\Log; */
 
 class AdventureEventManager
 {
@@ -27,7 +25,7 @@ class AdventureEventManager
         $this->lastAchievement = null;
     }
 
-    public function setLastAchievement(?Acheivement $achievement)
+    public function setLastAchievement(?Achievement $achievement)
     {
         $this->lastAchievement = $achievement;
     }
@@ -81,7 +79,8 @@ class AdventureEventManager
         if ($achievement)
         {
             $this->achievementHolder->setDescription($achievement);
-            $this->lastAchievement = $this->achievementHolder;
+            $this->setLastAchievement($this->achievementHolder);
+            /* $this->lastAchievement = $this->achievementHolder; */
         }
 
         $event->setPassed(true);

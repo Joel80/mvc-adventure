@@ -15,13 +15,11 @@ class Player
      * @var Room $formerRoom the room the player has left
      */
     private Room $currentRoom;
-    private Room $formerRoom;
     private Inventory $inventory;
 
-    public function __construct(Room $startingRoom/* , Inventory $inventory */)
+    public function __construct(Room $startingRoom)
     {
         $this->currentRoom = $startingRoom;
-        /* $this->inventory = $inventory; */
     }
 
     /**
@@ -41,16 +39,6 @@ class Player
     public function setCurrentRoom(Room $currentRoom): void
     {
         $this->currentRoom = $currentRoom;
-    }
-
-    /**
-     * Sets the former room
-     * @param $formerRoom the room the player left
-     * TODO: needed????
-     */
-    public function setFormerRoom(Room $formerRoom): void 
-    {
-        $this->setFormerRoom = $formerRoom;
     }
 
     public function setInventory(Inventory $inventory): void

@@ -44,22 +44,22 @@ class Room
         $this->description = $description;
     }
 
-    public function getTempDescriptions()
+    public function getTempDescriptions(): array
     {
         return $this->tempDescriptions;
     }
 
-    public function addTempDescription(string $description)
+    public function addTempDescription(string $description): void
     {
         $this->tempDescriptions[] = $description;
     }
 
-    public function removeTempDescriptions()
+    public function removeTempDescriptions(): void
     {
         $this->tempDescriptions = [];
     }
 
-    public function setInventory(Inventory $inventory)
+    public function setInventory(Inventory $inventory): void
     {
         $this->inventory = $inventory;
     }
@@ -69,7 +69,7 @@ class Room
         return $this->inventory;
     }
 
-    public function addExit(RoomExit $exit)
+    public function addExit(RoomExit $exit): void
     {
         $this->exits[] = $exit;
     }

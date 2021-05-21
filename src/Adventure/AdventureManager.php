@@ -7,10 +7,7 @@ namespace App\Adventure;
 use App\Adventure\Player;
 use App\Adventure\Room;
 use App\Adventure\RoomExit;
-/* use App\Adventure\AdventureData; */
 use App\Adventure\Map;
-/* use App\Entity\Event;
-use App\Entity\Log; */
 use App\Entity\Achievement;
 use App\Entity\AchievementLog;
 use App\Entity\RoomVisitLog;
@@ -19,7 +16,6 @@ use App\Adventure\AdventureDataSetter;
 
 class AdventureManager
 {
-   /*  private AdventureData $data; */
     private Map $map;
     private Player $player;
     private AchievementLog $achievementLog;

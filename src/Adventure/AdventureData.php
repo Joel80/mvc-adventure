@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace App\Adventure;
 
-use App\Adventure\ActorInterface;
-use App\Adventure\Room;
-
 class AdventureData
 {
     private array $data;
@@ -29,10 +26,10 @@ class AdventureData
         $this->data['playerRoomName'] = $roomName;
     }
 
-    public function setPlayerRoomExitsNameData(array $exitNames): void
+    /* public function setPlayerRoomExitsNameData(array $exitNames): void
     {
         $this->data['playerRoomExitNameData'] = $exitNames;
-    }
+    } */
 
     public function setPlayerRoomExits(array $exits): void
     {
@@ -58,9 +55,6 @@ class AdventureData
     {
         $this->data['playerRoomTempDescriptions'] = $tempDescriptions;
     }
-
-
-
 
     public function getAdventureData()
     {
