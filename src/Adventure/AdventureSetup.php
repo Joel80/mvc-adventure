@@ -10,23 +10,27 @@ use App\Adventure\RoomExit;
 use App\Adventure\AdventureData;
 use App\Adventure\AdventureManager;
 use App\Adventure\Map;
-use App\Entity\Event;
-use App\Entity\Log;
+use App\Adventure\Event;
+use App\Entity\Achievement;
+use App\Entity\AchievementLog;
 use App\Adventure\Inventory;
 use App\Adventure\Item;
 use App\Entity\RoomDescriptor;
+use App\Adventure\AdventureDataSetter;
+use App\Entity\RoomVisitLog;
+use App\Entity\Visit;
 
 class AdventureSetup
 {
     public function __construct()
     {}
 
-    public function setup(Log $adventureLog, array $roomDescriptors)
+    public function setup(AchievementLog $adventureLog, array $roomDescriptors, array $itemDescriptors, array $exitDescriptors, array $eventDescriptors, RoomVisitLog $roomVisitLog): AdventureManager
     {
+        //Create map
         $map = new Map();
 
-        $rooms = [];
-
+        //Create rooms
         foreach ($roomDescriptors as $roomDescriptor) {
 
             $roomDescription = $roomDescriptor->getDescription();
@@ -34,138 +38,81 @@ class AdventureSetup
             $roomImage = $roomDescriptor->getRoomImage();
             $roomName = $roomDescriptor->getRoomName();
             $room = new Room($roomDescription, $roomIndex, $roomImage, $roomName);
+            $room->setInventory(new Inventory);
 
             $map->addRoom($room, $roomIndex);
         }
 
-        /* $room1 = $rooms["roomOne"];
-        $room2 = $rooms["roomTwo"];
-        $room3 = $rooms["roomThree"];
-        $room4 = $rooms["roomFour"];
-        $room5 = $rooms["roomFive"];
-        $room6 = $rooms["roomSix"];
-        $room7 = $rooms["roomOnePostEv1"];
-        $room8 = $rooms["roomOnePostEv2"];
-        $room9 = $rooms["roomTwoPostEv3"];
-        $room10 = $rooms["roomThreePostEv4"];
-        $room11 = $rooms["roomFivePostEv5"]; */
-
         //Add inventories to rooms
-        $room1Inventory = new Inventory();
+        foreach ($itemDescriptors as $itemDescriptor) {
 
-        $idCard = new Item("An ID card", "ID card", "idCard", "An ID card lies in the debris on a desk.");
+            $description = $itemDescriptor->getDescription();
+            $name = $itemDescriptor->getName();
+            $itemId = $itemDescriptor->getItemId();
+            $placementDescription = $itemDescriptor->getPlacementDescription();
+            $roomIndex = $itemDescriptor->getRoomIndex();
+            $room = $map->getRoom($roomIndex);
 
-        $room1Inventory->addItem($idCard, $idCard->getItemId());
+            $item = new Item($description, $name, $itemId, $placementDescription);
 
-        $map
-            ->getRoom("roomOne")
-            ->setInventory($room1Inventory)
-        ;
-
-        $room2Inventory = new Inventory();
-
-        $ironBar = new Item("An iron bar", "Iron bar", "ironBar", "An iron bar stands in one corner");
-
-        $room2Inventory->addItem($ironBar, $ironBar->getItemId());
-
-        $map
-            ->getRoom("roomTwo")
-            ->setInventory($room2Inventory)
-        ;
-
-        $map
-            ->getRoom("roomThree")
-            ->setInventory(new Inventory)
-        ;
-
-        $calculator = new Item("A broken calculator", "Broken calculator - the seven seems to be missing", "calculator", "A broken calculator lies on the floor.");
-
-        $room4Inventory = new Inventory();
-
-        $room4Inventory->addItem($calculator, $calculator->getItemId());
-
-        $map
-            ->getRoom("roomFour")
-            ->setInventory($room4Inventory)
-        ;
-
-        $dirtyCloth = new Item("Dirty cloth rag", "Dirty cloth rag", "dirtyClothRag", "A dirty cloth rag hangs on the wall next to the southern exit.");
-
-        $room5Inventory = new Inventory();
-
-        $room5Inventory->addItem($dirtyCloth, $dirtyCloth->getItemId());
-
-        $map
-            ->getRoom("roomFive")
-            ->setInventory($room5Inventory)
-        ;
-
-        $map
-            ->getRoom("roomSix")
-            ->setInventory(new Inventory)
-        ;
+            $room->getInventory()->addItem($item, $itemId);
+        }
 
         //Add exits to rooms
-        $map
-            ->getRoom("roomTwo")
-            ->addExit(new RoomExit($map->getRoom("roomOne"), "Southern Exit"));
-        ;
+        foreach ($exitDescriptors as $exitDescriptor) {
 
-        $map
-            ->getRoom("roomTwo")
-            ->addExit(new RoomExit($map->getRoom("roomThree"), "Eastern Exit"));
-        ;
+            $leadsToRoom = $exitDescriptor->getLeadsToRoom();
+            $locatedInRoom = $exitDescriptor->getLocatedInRoom();
+            $name = $exitDescriptor->getName();
+            
+            $roomContaining = $map->getRoom($locatedInRoom);
+            
+            $roomLeadsTo = $map->getRoom($leadsToRoom);
 
-        $map
-            ->getRoom("roomThree")
-            ->addExit(new RoomExit($map->getRoom("roomTwo"), "Western Exit"));
-        ;
+            $exit = new RoomExit($roomLeadsTo, $name);
 
-        $map
-            ->getRoom("roomThree")
-            ->addExit(new RoomExit($map->getRoom("roomFour"), "Eastern Exit"));
-        ;
+            $roomContaining->addExit($exit);
+        }
 
-        $map
-            ->getRoom("roomThree")
-            ->addExit(new RoomExit($map->getRoom("roomFive"), "Northern Exit"));
-        ;
+        //Create events from event descriptors
 
-        $map
-            ->getRoom("roomFour")
-            ->addExit(new RoomExit($map->getRoom("roomThree"), "Western Exit"));
-        ;
+        $events = [];
 
-        $map
-        ->getRoom("roomFive")
-        ->addExit(new RoomExit($map->getRoom("roomThree"), "Southern Exit"));
-    ;
-        /* $room2->addExit(new RoomExit($room1, "Southern Exit"));
+        foreach ($eventDescriptors as $eventDescriptor) {
 
-        $room2->addExit(new RoomExit($room3, "Eastern Exit"));
+            $eventId = $eventDescriptor->getEvent();
+            $description = $eventDescriptor->getDescription();
+            $roomDescription = $eventDescriptor->getRoomDescription();
+            $eventRoomIndex = $eventDescriptor->getEventRoom();
+            $achievement = $eventDescriptor->getAchievement();
+            $addExit = $eventDescriptor->getAddExit();
 
-        $room3->addExit(new RoomExit($room2, "Western exit"));
+            $eventRoom = $map->getRoom($eventRoomIndex);
 
-        $room3->addExit(new RoomExit($room4, "Eastern exit"));
+            $event = new Event($eventId, $description, $roomDescription, $eventRoom, $achievement);
 
-        $room3->addExit(new RoomExit($room5, "Northern exit"));
+            if ($addExit) {
+                $leadsToRoom = $eventDescriptor->getExitLeadsTo();
+                $isInRoom = $eventDescriptor->getExitIsInRoom();
+                $exitName = $eventDescriptor->getExitName();
 
-        $room4->addExit(new RoomExit($room3, "Western exit"));
 
-        $room5->addExit(new RoomExit($room3, "Southern exit"));*/
+                $roomLeadsTo = $map->getRoom($leadsToRoom);
 
-        /* $map->addRoom($room1, $room1->getRoomIndex());
-        $map->addRoom($room2, $room2->getRoomIndex());
-        $map->addRoom($room3, $room3->getRoomIndex());
-        $map->addRoom($room4, $room4->getRoomIndex());
-        $map->addRoom($room5, $room5->getRoomIndex());
-        $map->addRoom($room6, $room6->getRoomIndex());
-        $map->addRoom($room6, $room6->getRoomIndex());
-        $map->addRoom($room7, $room7->getRoomIndex());
-        $map->addRoom($room8, $room8->getRoomIndex());
-        $map->addRoom($room9, $room9->getRoomIndex());
-        $map->addRoom($room10, $room10->getRoomIndex());
-        $map->addRoom($room11, $room11->getRoomIndex()); */
+                $roomIsIn = $map->getRoom($isInRoom);
+
+                $exit = new RoomExit($roomLeadsTo, $exitName);
+
+                $event->setExit($exit);
+
+                $event->setExitIsIn($roomIsIn);
+            }
+
+            $events[$eventId] = $event;
+        }
+
+        //Create achievementholder for AdventureEventManager
+        $achievementHolder = new Achievement();
 
         //Create player
         $player = new Player($map->getRoom("roomOne"));
@@ -177,11 +124,13 @@ class AdventureSetup
         //Create adventureData
         $adventureData = new AdventureData();
 
+        $adventureDataSetter = new AdventureDataSetter($adventureData, $player);
+
         //Create adventuerEventManager
-        $eventManager = new AdventureEventManager(5);
+        $eventManager = new AdventureEventManager($events, $achievementHolder);
 
         //Create and return adventureManager
-        $adventureManager = new AdventureManager($player, $adventureData, $map, $adventureLog, $eventManager);
+        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $adventureLog, $eventManager, $roomVisitLog);
 
         return $adventureManager;
     }
