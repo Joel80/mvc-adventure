@@ -3,7 +3,7 @@
 {% block title %}Adventure logs{% endblock %}
 
 {% block body %}
-    <h2>Adventure logs</h2>
+    <h2>Room Visits Logs</h2>
     <table class="log-table">
         <tr>
             <th>Log number</th>
@@ -16,7 +16,7 @@
             <td>{{log.id}}</td>
                 <td>{{ log.date|date('Y-m-d')}}</td>
                 <td>{{ log.playerName }}</td>
-                <td><a href="{{ path('app_show_events',  {'id': log.id}) }}">Show events</a></td>
+                <td><a href="{{ path('app_show_visits',  {'id': log.id}) }}">Show visits</a></td>
             </tr>
         {% endfor %}
     </table>

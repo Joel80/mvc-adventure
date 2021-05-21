@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Room Visits{% endblock %}
+
+{% block body %}
+<h2>You visited these rooms</h2>
+{% for visit in visits %}
+
+<p>
+    {{ visit.roomName }}
+    {# {{ visit.timesVisited }} #}
+
+    {% if visit.timesVisited > 0 %}
+        {% for i in 1..visit.timesVisited %}
+            {{ '*' }}
+        {% endfor %}
+    {% endif %}
+</p>
+{% endfor %}
+{% endblock %}
