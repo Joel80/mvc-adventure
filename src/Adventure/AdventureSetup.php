@@ -20,15 +20,33 @@ use App\Adventure\AdventureDataSetter;
 use App\Entity\RoomVisitLog;
 use App\Entity\Visit;
 
+/**
+ * A setup class for the game
+ */
 class AdventureSetup
 {
+    /**
+     * @var array $setupObjects holds the map and events
+     */
     private array $setupObjects;
 
+    /**
+     * Constructur
+     */
     public function __construct()
     {
         $this->setupObjects = [];
     }
 
+    /**
+     * Setup for the game - prepares map and event from descriptors
+     * @param array $roomDescriptors the descriptors for the rooms
+     * @param array $itemDescriptors the descriptors for the items
+     * @param array $exitDescriptors the descriptors for the exits
+     * @param array $eventDescriptors the descriptors for the events
+     * 
+     * @return array $setupObjects holds the map and events
+     */
     public function setup(array $roomDescriptors, array $itemDescriptors, array $exitDescriptors, array $eventDescriptors): array
     {
         //Create map
