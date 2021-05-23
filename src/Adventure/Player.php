@@ -11,6 +11,7 @@ class Player
 {
     /**
      * @var Room $currentRoom the room the player is in
+     * @var Inventory $inventory the players inventory
      *
      */
     private Room $currentRoom;
@@ -33,18 +34,27 @@ class Player
     /**
      * Sets the  room the player is in
      * @param Room $currentRoom the room the player is in
-     * @return Void
+     * @return void
      */
     public function setCurrentRoom(Room $currentRoom): void
     {
         $this->currentRoom = $currentRoom;
     }
 
+    /**
+     * Sets the players inventory
+     * @param Inventory $inventoryt the players new inventory
+     * @return void
+     */
     public function setInventory(Inventory $inventory): void
     {
         $this->inventory = $inventory;
     }
 
+    /**
+     * Gets the players inventory
+     * @return Inventory the players inventory
+     */
     public function getInventory(): Inventory
     {
         return $this->inventory;
