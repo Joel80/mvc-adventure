@@ -8,6 +8,3 @@ parameters:
         #- test
     bootstrapFiles:
         - .phpstan.constants.php
-    doctrine:
-        repositoryClass: App\Repository\YatzyHighScoreRepository
-    
