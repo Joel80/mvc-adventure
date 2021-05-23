@@ -17,13 +17,25 @@ use App\Adventure\AdventureDataSetter;
 use App\Entity\RoomVisitLog;
 use App\Entity\Visit;
 
+/**
+ * A class that creates the adventure manager of the game
+ */
 class AdventureManagerCreator
 {
+    /**
+     * Constructor
+     */
     public function __construct()
-    {
-    }
+    {}
 
-    public function createAdventureManager(array $setupObjects, RoomVisitLog $roomVisitLog, AchievementLog $adventureLog)
+    /**
+     * Creates the adventure manager
+     * @param array $setupObjects contains map and events
+     * @param RoomVisitLog $roomVisitLog the games room visit log
+     * @param AchievementLog $achievementLog the games achievement log
+     * @return AdventureManager
+     */
+    public function createAdventureManager(array $setupObjects, RoomVisitLog $roomVisitLog, AchievementLog $adventureLog): AdventureManager
     {
         //Get map
         $map = $setupObjects[0];
