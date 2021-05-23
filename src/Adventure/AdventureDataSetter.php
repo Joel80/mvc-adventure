@@ -15,17 +15,31 @@ use App\Entity\Achievement;
 use App\Entity\AchievementLog;
 use App\Adventure\AdventureEventManager;
 
+/**
+ * A class with methods that prepares data and calls AdventureData to set the data
+ */
 class AdventureDataSetter
 {
+    /**
+     * @var AdventureData $data holds an instance of AdventureData
+     * @var Player $player holds an instance of Player
+     */
     private AdventureData $data;
     private Player $player;
 
+    /**
+     * Constructor
+     */
     public function __construct(AdventureData $data, Player $player)
     {
         $this->data = $data;
         $this->player = $player;
     }
 
+    /**
+     * Sets data by calling the set methods of this class
+     * @return void
+     */
     public function setData(): void
     {
         $this->setCurrentPlayerRoomDescriptionData();
@@ -45,6 +59,10 @@ class AdventureDataSetter
         $this->setCurrentPlayerRoomNameData();
     }
 
+    /**
+     * Prepares and sets the room description data
+     * @return void
+     */
     public function setCurrentPlayerRoomDescriptionData(): void
     {
         $room = $this->player->getCurrentRoom();
@@ -54,6 +72,10 @@ class AdventureDataSetter
         $this->data->setPlayerRoomDescriptionData($roomDescription);
     }
 
+    /**
+     * Prepares and sets the room image data
+     * @return void
+     */
     public function setCurrentPlayerRoomImageData(): void
     {
         $room = $this->player->getCurrentRoom();
@@ -63,6 +85,10 @@ class AdventureDataSetter
         $this->data->setPlayerRoomImageData($roomImage);
     }
 
+    /**
+     * Prepares and sets the room name data
+     * @return void
+     */
     public function setCurrentPlayerRoomNameData(): void
     {
         $room = $this->player->getCurrentRoom();
@@ -72,6 +98,10 @@ class AdventureDataSetter
         $this->data->setPlayerRoomNameData($roomName);
     }
 
+    /**
+     * Prepares and sets the room exit(s) data
+     * @return void
+     */
     public function setCurrentPlayerRoomExitsData(): void
     {
         $exitsData = [];
@@ -93,6 +123,10 @@ class AdventureDataSetter
         $this->data->setPlayerRoomExits($exitsData);
     }
 
+    /**
+     * Prepares and sets the room items data
+     * @return void
+     */
     public function setCurrentPlayerRoomItemsData(): void
     {
         $room = $this->player->getCurrentRoom();
@@ -125,6 +159,10 @@ class AdventureDataSetter
         $this->data->setPlayerRoomItemsData($roomItems);
     }
 
+    /**
+     * Prepares and sets the player item data
+     * @return void
+     */
     public function setPlayerItemsData()
     {
         $inventory = $this->player->getInventory();
@@ -152,12 +190,20 @@ class AdventureDataSetter
         $this->data->setPlayerItemsData($playerItems);
     }
 
+    /**
+     * Prepares and sets the room index data
+     * @return void
+     */
     public function setCurrentPlayerRoomIndexData()
     {
         $currentRoomIndex = $this->player->getCurrentRoom()->getRoomIndex();
         $this->data->setPlayerRoomIndexData($currentRoomIndex);
     }
 
+    /**
+     * Prepares and sets the room temporary description data
+     * @return void
+     */
     public function setCurrentPlayerRoomTempDescriptionsData()
     {
 
@@ -165,7 +211,11 @@ class AdventureDataSetter
         $this->data->setPlayerRoomTempDescriptionsData($tempDescriptions);
     }
 
-    public function getAdventureData()
+    /**
+     * Gets the data from AdventureData
+     * @return void
+     */
+    public function getAdventureData(): array
     {
         return $this->data->getAdventureData();
     }
