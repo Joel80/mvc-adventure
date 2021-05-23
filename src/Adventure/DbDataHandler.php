@@ -15,15 +15,30 @@ use App\Entity\EventDescriptor;
 use App\Entity\RoomDescriptor;
 use DateTime;
 
+/**
+ * A class that handles information in the database
+ */
 class DbDataHandler
 {
+    /**
+     * @var $entityManager holds an instance of entitymanager
+     */
     private $entityManager;
 
+    /**
+     * Constructor
+     * @param EntityManagerInterface $entityManager the entitymanager
+     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * Creates and returns an Achievementlog
+     * @param string $playerName
+     * @return AchievementLog
+     */
     public function createAchievementLog(string $playerName = "NoName"): AchievementLog
     {
         //Create log and set date
@@ -41,6 +56,10 @@ class DbDataHandler
         return $adventureLog;
     }
 
+    /**
+     * Creates room descriptors from info in db and returns them in an array
+     * @return array with descriptors
+     */
     public function getRoomDescriptors(): array
     {
         //Get the room descriptors from the database
@@ -51,6 +70,10 @@ class DbDataHandler
         return $roomDescriptors;
     }
 
+    /**
+     * Creates item descriptors from info in db and returns them in an array
+     * @return array with descriptors
+     */
     public function getItemDescriptors(): array
     {
         //Get the room descriptors from the database
@@ -61,6 +84,10 @@ class DbDataHandler
         return $itemDescriptors;
     }
 
+    /**
+     * Creates event descriptors from info in db and returns them in an array
+     * @return array with descriptors
+     */
     public function getEventDescriptors(): array
     {
         //Get the room descriptors from the database
@@ -71,6 +98,10 @@ class DbDataHandler
         return $eventDescriptors;
     }
 
+    /**
+     * Creates exit descriptors from info in db and returns them in an array
+     * @return array with descriptors
+     */
     public function getExitDescriptors(): array
     {
         //Get the room descriptors from the database
@@ -81,6 +112,11 @@ class DbDataHandler
         return $exitDescriptors;
     }
 
+    /**
+     * Creates and returns a RoomVisitLog
+     * @param string $playerName
+     * @return RoomVisitLog
+     */
     public function createRoomVisitLog(array $roomDescriptors, string $playerName = "NoName"): RoomVisitLog
     {
         $roomVisitLog = new RoomVisitLog();
