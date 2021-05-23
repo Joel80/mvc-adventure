@@ -18,7 +18,9 @@ use App\Entity\ExitDescriptor;
 use App\Entity\EventDescriptor;
 use App\Entity\Visit;
 use App\Entity\RoomVisitLog;
-
+use App\Adventure\AdventureManagerCreator;
+//use DateTime;
+use App\Adventure\DbDataHandler;
 
 class AdventureController extends AbstractController
 {
@@ -38,7 +40,6 @@ class AdventureController extends AbstractController
         $adventureManager = $this->session->get('manager', null);
 
         if (!$adventureManager) {
-
             return $this->render(
                 'adventure/setup.html.twig'
             );
@@ -49,8 +50,8 @@ class AdventureController extends AbstractController
             ->getLastAchievement()
         ;
 
-        if($lastAchievement) {
-
+        if ($lastAchievement) {
+            /** @var \Doctrine\ORM\EntityManagerInterface */
             $entityManager = $this->getDoctrine()->getManager();
 
             $logId = $adventureManager->getAchievementLog()->getId();
@@ -91,7 +92,8 @@ class AdventureController extends AbstractController
         ;
 
         $adventureManager
-            ->getCurrentPlayerRoom()
+            ->getPlayer()
+            ->getCurrentRoom()
             ->removeTempDescriptions()
         ;
 
@@ -99,7 +101,7 @@ class AdventureController extends AbstractController
             ->getPlayer()
             ->setCurrentRoom($nextRoom)
         ;
-
+        /** @var \Doctrine\ORM\EntityManagerInterface */
         $entityManager = $this->getDoctrine()->getManager();
 
         $logId = $adventureManager->getRoomVisitLog()->getId();
@@ -140,7 +142,7 @@ class AdventureController extends AbstractController
             ->getInventory()
             ->addItem($item, $item->getItemId())
         ;
-        
+
         $adventureManager
             ->getPlayer()
             ->getCurrentRoom()
@@ -171,66 +173,39 @@ class AdventureController extends AbstractController
 
     public function setup(Request $request)
     {
+        //Get player name
         $playerName = $request->get('playerName');
-        //Create log and set date
-        $adventureLog = new AchievementLog();
 
-        $adventureLog->setDate(new \DateTime());
-
-        $adventureLog->setPlayerName($playerName);
-
-        //Save log object in database
+        /** @var \Doctrine\ORM\EntityManagerInterface */
         $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($adventureLog);
-        $entityManager->flush();
 
-        //Get the room descriptors from the database
-        $roomDescriptors = $entityManager
-        ->getRepository(RoomDescriptor::class)
-        ->findAll();
+        //Create dataHandler
+        $dbDataHandler = new DbDataHandler($entityManager);
 
-        //Get the item descriptors from the database
-        $itemDescriptors = $entityManager
-        ->getRepository(ItemDescriptor::class)
-        ->findAll();
+        //Create achievement log
+        $adventureLog = $dbDataHandler->createAchievementLog($playerName);
 
-        //Get the exit descriptors from the database
-        $exitDescriptors = $entityManager
-        ->getRepository(ExitDescriptor::class)
-        ->findAll();
+        //Get descriptors from db
+        $roomDescriptors = $dbDataHandler->getRoomDescriptors();
+        $itemDescriptors = $dbDataHandler->getItemDescriptors();
+        $eventDescriptors = $dbDataHandler->getEventdescriptors();
+        $exitDescriptors = $dbDataHandler->getExitDescriptors();
 
-        //Get the event descriptors from the database
-        $eventDescriptors = $entityManager
-        ->getRepository(EventDescriptor::class)
-        ->findAll();
+        //Create room visit log
+        $roomVisitLog = $dbDataHandler->createRoomVisitLog($roomDescriptors, $playerName);
 
-        $roomVisitLog = new RoomVisitLog();
-
-        $roomVisitLog->setDate(new \DateTime);
-
-        $roomVisitLog->setPlayerName($playerName);
-
-        $entityManager->persist($roomVisitLog);
-        $entityManager->flush();
-
-
-        foreach($roomDescriptors as $roomDescriptor) {
-            $roomName = $roomDescriptor->getRoomName();
-            $roomIndex = $roomDescriptor->getRoomIndex();
-            $visit = new Visit();
-            $visit->setRoomName($roomName);
-            $visit->setRoomIndex($roomIndex);
-            $visit->setTimesVisited(0);
-            $visit->setRoomVisitLog($roomVisitLog);
-            $entityManager->persist($visit);
-        }
-
-        $entityManager->flush();
-
+        //Create setup
         $setup = new AdventureSetup();
 
-        $adventureManager = $setup->setup($adventureLog, $roomDescriptors, $itemDescriptors, $exitDescriptors, $eventDescriptors, $roomVisitLog);
+        //Setup game data from descriptors
+        $setupObjects = $setup->setup($roomDescriptors, $itemDescriptors, $exitDescriptors, $eventDescriptors);
 
+        //Create adventure manager
+        $creator = new AdventureManagerCreator();
+
+        $adventureManager = $creator->createAdventureManager($setupObjects, $roomVisitLog, $adventureLog);
+
+        //Store manager in session
         $this->session->set('manager', $adventureManager);
 
         return $this->redirectToRoute('app_adventure_play_game', [], 301);
@@ -238,6 +213,7 @@ class AdventureController extends AbstractController
 
     public function endGame()
     {
+        //Remove manager from session
         $this->session->remove('manager');
 
         return $this->redirectToRoute('app_adventure_play_game', [], 301);
