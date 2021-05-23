@@ -7,7 +7,6 @@ namespace App\Adventure;
 use App\Adventure\Room;
 use App\Adventure\RoomExit;
 
-
 class Event
 {
     private string $eventId;

@@ -14,7 +14,7 @@ class RoomExit
      * @var string $exitName the name of the exit
      */
     private Room $roomExitLeadsTo;
-    private string $name;
+    private string $exitName;
 
     /**
      * Constructor

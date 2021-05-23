@@ -9,7 +9,8 @@ class AdventureData
     private array $data;
 
     public function __construct()
-    {}
+    {
+    }
 
     public function setPlayerRoomDescriptionData(string $description): void
     {

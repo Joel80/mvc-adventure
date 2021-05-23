@@ -36,7 +36,7 @@ class Inventory
 
     public function getItem($itemId): ?Item
     {
-        foreach ($this->items as $key=>$item) {
+        foreach ($this->items as $key => $item) {
             if ($key == $itemId) {
                 return $item;
             }

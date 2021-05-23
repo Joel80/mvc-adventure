@@ -47,5 +47,4 @@ class AchievementController extends AbstractController
         //return $this->json($events);
         return $this->render('log/find_all_events.html.twig', ['events' => $achievements]);
     }
-
 }

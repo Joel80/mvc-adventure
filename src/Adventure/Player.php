@@ -6,13 +6,12 @@ namespace App\Adventure;
 
 use App\Adventure\Room;
 
-
-/**An interface for the actors in the adventure game */
+/**A player class for the adventure game */
 class Player
 {
     /**
      * @var Room $currentRoom the room the player is in
-     * @var Room $formerRoom the room the player has left
+     *
      */
     private Room $currentRoom;
     private Inventory $inventory;
@@ -24,7 +23,7 @@ class Player
 
     /**
      * Gets the room the player is in
-     * @return Room $currentRoom 
+     * @return Room $currentRoom
      */
     public function getCurrentRoom(): Room
     {
@@ -33,7 +32,7 @@ class Player
 
     /**
      * Sets the  room the player is in
-     * @param $currentRoom the room the player is in
+     * @param Room $currentRoom the room the player is in
      * @return Void
      */
     public function setCurrentRoom(Room $currentRoom): void

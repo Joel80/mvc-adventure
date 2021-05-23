@@ -18,7 +18,8 @@ use App\Adventure\AdventureEventManager;
 class AdventureDataSetter
 {
     private AdventureData $data;
-    
+    private Player $player;
+
     public function __construct(AdventureData $data, Player $player)
     {
         $this->data = $data;
@@ -79,17 +80,14 @@ class AdventureDataSetter
 
         $exits = $room->getExits();
 
-        foreach ($exits as $exit)
-        {
-
+        foreach ($exits as $exit) {
             $exitName = $exit->getExitName();
 
             $exitRoom = $exit->getRoomExitLeadsTo();
-            
-            $roomIndex= $exitRoom->getRoomIndex();
+
+            $roomIndex = $exitRoom->getRoomIndex();
 
             $exitsData[$exitName] = $roomIndex;
-
         }
 
         $this->data->setPlayerRoomExits($exitsData);
@@ -105,9 +103,7 @@ class AdventureDataSetter
 
         $roomItems = [];
 
-        foreach ($items as $item)
-        {
-
+        foreach ($items as $item) {
             $currentItem = [];
 
             $itemId = $item->getItemId();
@@ -120,8 +116,8 @@ class AdventureDataSetter
             $itemDescription = $item->getDescription();
             $currentItem['description'] = $itemDescription;
 
-            $itemPlacementDescription = $item->getPlacementDescription();
-            $currentItem["placementDescription"] = $itemPlacementDescription;
+            $itemPlacement = $item->getPlacementDescription();
+            $currentItem["placementDescription"] = $itemPlacement;
 
             array_push($roomItems, $currentItem);
         }
@@ -131,15 +127,13 @@ class AdventureDataSetter
 
     public function setPlayerItemsData()
     {
-        $inventory =$this->player->getInventory();
+        $inventory = $this->player->getInventory();
 
         $items = $inventory->getItems();
 
         $playerItems = [];
 
-        foreach ($items as $item)
-        {
-
+        foreach ($items as $item) {
             $currentItem = [];
 
             $itemId = $item->getItemId();
@@ -156,7 +150,6 @@ class AdventureDataSetter
         }
 
         $this->data->setPlayerItemsData($playerItems);
-
     }
 
     public function setCurrentPlayerRoomIndexData()
@@ -167,9 +160,9 @@ class AdventureDataSetter
 
     public function setCurrentPlayerRoomTempDescriptionsData()
     {
-        
-       $tempDescriptions =$this->player->getCurrentRoom()->getTempDescriptions();
-       $this->data->setPlayerRoomTempDescriptionsData($tempDescriptions);
+
+        $tempDescriptions = $this->player->getCurrentRoom()->getTempDescriptions();
+        $this->data->setPlayerRoomTempDescriptionsData($tempDescriptions);
     }
 
     public function getAdventureData()

@@ -86,7 +86,7 @@ class AchievementLog
         return $this;
     }
 
-    public function removeAchievement(Achievement $achievement): self
+/*  public function removeAchievement(Achievement $achievement): self
     {
         if ($this->achievements->removeElement($achievement)) {
             // set the owning side to null (unless already changed)
@@ -96,5 +96,5 @@ class AchievementLog
         }
 
         return $this;
-    }
+    } */
 }

@@ -17,12 +17,12 @@ class Item
     private string $itemId;
     private string $placementDescription;
 
-    public function __construct(string $description, string $name, string $itemId, string $itemPlacementDescription)
+    public function __construct(string $description, string $name, string $itemId, string $itemPlacement)
     {
         $this->description = $description;
         $this->name = $name;
         $this->itemId = $itemId;
-        $this->placementDescription = $itemPlacementDescription;
+        $this->placementDescription = $itemPlacement;
     }
 
     public function getDescription(): string

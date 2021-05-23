@@ -76,15 +76,14 @@ class AdventureEventManager
             $room->addExit($exit);
         }
 
-        if ($achievement)
-        {
+        if ($achievement) {
             $this->achievementHolder->setDescription($achievement);
             $this->setLastAchievement($this->achievementHolder);
             /* $this->lastAchievement = $this->achievementHolder; */
         }
 
         $event->setPassed(true);
-}
+    }
 
     public function executeEventNone(Player $player)
     {
@@ -93,5 +92,4 @@ class AdventureEventManager
             ->addTempDescription("Nothing happens")
         ;
     }
-
 }

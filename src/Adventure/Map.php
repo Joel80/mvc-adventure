@@ -26,7 +26,7 @@ class Map
         return $this->map;
     }
 
-    public function getRoom(string $index): Room 
+    public function getRoom(string $index): Room
     {
         return $this->map[$index];
     }

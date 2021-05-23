@@ -47,5 +47,4 @@ class RoomVisitController extends AbstractController
         //return $this->json($events);
         return $this->render('room_visit/find_all_visits.html.twig', ['visits' => $visits]);
     }
-
 }

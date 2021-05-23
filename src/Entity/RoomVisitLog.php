@@ -86,7 +86,7 @@ class RoomVisitLog
         return $this;
     }
 
-    public function removeVisit(Visit $visit): self
+/*     public function removeVisit(Visit $visit): self
     {
         if ($this->visits->removeElement($visit)) {
             // set the owning side to null (unless already changed)
@@ -96,5 +96,5 @@ class RoomVisitLog
         }
 
         return $this;
-    }
+    } */
 }

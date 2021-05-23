@@ -28,7 +28,7 @@ class AdventureManager
         $this->player = $player;
         $this->dataSetter = $adventureDataSetter;
         $this->map = $map;
-        $this->lastEvent = null;
+        //$this->lastEvent = null;
         $this->achievementLog = $achievementLog;
         $this->roomVisitLog = $roomVisitLog;
         $this->eventManager = $eventManager;
@@ -44,7 +44,7 @@ class AdventureManager
         return $this->player;
     }
 
-    public function getMap(): Map 
+    public function getMap(): Map
     {
         return $this->map;
     }
