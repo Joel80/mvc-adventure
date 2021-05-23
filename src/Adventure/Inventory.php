@@ -14,26 +14,49 @@ class Inventory
     */
     private array $items;
 
+    /**
+     * Constructor
+     */
     public function __construct()
     {
         $this->items = [];
     }
 
+    /**
+     * Gets the items
+     * @return array with the items
+     */
     public function getItems(): array
     {
         return $this->items;
     }
 
-    public function addItem(Item $item, $itemId): void
+    /**
+     * Add an items
+     * @param Item the item
+     * @param string $itemId 
+     * @return void
+     */
+    public function addItem(Item $item, string $itemId): void
     {
         $this->items[$itemId] = $item;
     }
 
-    public function removeItem($itemId): void
+    /**
+     * Add an items
+     * @param string $itemId
+     * @return void
+     */
+    public function removeItem(string $itemId): void
     {
         unset($this->items[$itemId]);
     }
 
+    /**
+     * Gets an items
+     * @param string $itemId the id
+     * @return Item|null the item
+     */
     public function getItem($itemId): ?Item
     {
         foreach ($this->items as $key => $item) {
