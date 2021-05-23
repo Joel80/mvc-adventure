@@ -198,7 +198,7 @@ p {
 }
 
 
-/* 
+/*
 .exits {
     grid-row: 4/4;
 } */
@@ -291,7 +291,6 @@ input.exit-button {
     padding: 0.5em;
     text-align: center;
 }
-
 
 .log-table tr {
     color: #ebebebee;
