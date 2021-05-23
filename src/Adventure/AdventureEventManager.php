@@ -12,12 +12,23 @@ use App\Adventure\Map;
 use App\Entity\Achievement;
 use App\Entity\AchievementLog;
 
+/**
+ * A class for managing the events of the game
+ */
 class AdventureEventManager
 {
+    /**
+     * @var array $events Holds the events
+     * @var Achievement|null Holds the last event
+     * @var Achievement a holder that can hold an achievement set by an event
+     */
     private array $events;
     private ?Achievement $lastAchievement;
     private Achievement $achievementHolder;
 
+    /**
+     * Constructor
+     */
     public function __construct(array $events, Achievement $achievementHolder)
     {
         $this->events = $events;
@@ -25,17 +36,29 @@ class AdventureEventManager
         $this->lastAchievement = null;
     }
 
+    /**
+     * Sets last achievement
+     * @param Achievement|null
+     */
     public function setLastAchievement(?Achievement $achievement)
     {
         $this->lastAchievement = $achievement;
     }
 
+    /**
+     * Gets last achievement
+     * @return Achievement|null
+     */
     public function getLastAchievement(): ?Achievement
     {
         return $this->lastAchievement;
     }
 
-    public function checkEvent(string $itemId, string $roomIndex, Player $player)
+    /**
+     * Checks if an event has passed
+     * @return void
+     */
+    public function checkEvent(string $itemId, string $roomIndex, Player $player): void
     {
         $eventString = $itemId . '&' . $roomIndex;
 
@@ -85,7 +108,12 @@ class AdventureEventManager
         $event->setPassed(true);
     }
 
-    public function executeEventNone(Player $player)
+    /**
+     * Executes the no event if there was no event
+     * @param Player $player an instance of the Player class
+     * @return void
+     */
+    public function executeEventNone(Player $player): void
     {
         $player
             ->getCurrentRoom()
