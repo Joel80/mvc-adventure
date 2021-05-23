@@ -30,19 +30,19 @@ class AdventureEventManagerTest extends TestCase
 
         $achievement = new Achievement();
 
-        $event = new Event("none", "none",  "none", $room, "none");
-        
+        $event = new Event("none", "none", "none", $room, "none");
+
         $events = [];
 
         $events[$event->getEventId()] = $event;
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
-        $this->assertInstanceOf("\App\Adventure\AdventureEventManager", $adventureEventManager);
+        $this->assertInstanceOf("\App\Adventure\AdventureEventManager", $eventManager);
     }
 
     /**
-     * Test setLastAchievement method 
+     * Test setLastAchievement method
      */
     public function testAdventureEventManagerSetLastAchievement()
     {
@@ -52,24 +52,24 @@ class AdventureEventManagerTest extends TestCase
 
         $achievement2 = new Achievement();
 
-        $event = new Event("none", "none",  "none", $room, "none");
-        
+        $event = new Event("none", "none", "none", $room, "none");
+
         $events = [];
 
         $events[$event->getEventId()] = $event;
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
-        $adventureEventManager->setLastAchievement($achievement2);
+        $eventManager->setLastAchievement($achievement2);
 
-        $achievement3 = $adventureEventManager->getLastAchievement();
+        $achievement3 = $eventManager->getLastAchievement();
 
         $this->assertInstanceOf("\App\Entity\Achievement", $achievement3);
     }
 
     /**
      * Test getLastAchievement method returns null
-     * when lastAchievement is not set 
+     * when lastAchievement is not set
      */
     public function testAdventureEventManagerGetLastAchievementReturnsNull()
     {
@@ -77,15 +77,15 @@ class AdventureEventManagerTest extends TestCase
 
         $achievement = new Achievement();
 
-        $event = new Event("none", "none",  "none", $room, "none");
-        
+        $event = new Event("none", "none", "none", $room, "none");
+
         $events = [];
 
         $events[$event->getEventId()] = $event;
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
-        $achievement3 = $adventureEventManager->getLastAchievement();
+        $achievement3 = $eventManager->getLastAchievement();
 
         $this->assertNull($achievement3);
     }
@@ -99,19 +99,19 @@ class AdventureEventManagerTest extends TestCase
 
         $achievement = new Achievement();
 
-        $event = new Event("none&none", "none",  "none", $room, "none");
-        
+        $event = new Event("none&none", "none", "none", $room, "none");
+
         $events = [];
 
         $events[$event->getEventId()] = $event;
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
         $room = new Room("none", "none", "none", "none");
 
         $player = new Player($room);
 
-        $adventureEventManager->checkEvent("x", "y", $player);
+        $eventManager->checkEvent("x", "y", $player);
 
         $descriptions = $player->getCurrentRoom()->getTempDescriptions();
 
@@ -131,19 +131,19 @@ class AdventureEventManagerTest extends TestCase
 
         $achievement = new Achievement();
 
-        $event = new Event("none&none", "none",  "none", $room, "none");
-        
+        $event = new Event("none&none", "none", "none", $room, "none");
+
         $events = [];
 
         $events[$event->getEventId()] = $event;
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
         $room = new Room("none", "none", "none", "none");
 
         $player = new Player($room);
 
-        $adventureEventManager->checkEvent("none", "none", $player);
+        $eventManager->checkEvent("none", "none", $player);
 
         $descriptions = $player->getCurrentRoom()->getTempDescriptions();
 
@@ -163,23 +163,23 @@ class AdventureEventManagerTest extends TestCase
 
         $achievement = new Achievement();
 
-        $event = new Event("none&none", "none",  "none", $room, "none");
+        $event = new Event("none&none", "none", "none", $room, "none");
 
         $exit = new RoomExit($room, "none");
 
         $event->setExit($exit);
 
         $event->setExitIsIn($room);
-        
+
         $events = [];
 
         $events[$event->getEventId()] = $event;
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
         $player = new Player($room);
 
-        $adventureEventManager->checkEvent("none", "none", $player);
+        $eventManager->checkEvent("none", "none", $player);
 
         $exits = $room->getExits();
 
@@ -197,7 +197,7 @@ class AdventureEventManagerTest extends TestCase
 
         $achievement = new Achievement();
 
-        $event = new Event("none&none", "none",  "none", $room, "none");
+        $event = new Event("none&none", "none", "none", $room, "none");
 
         $event->setPassed(true);
 
@@ -205,11 +205,11 @@ class AdventureEventManagerTest extends TestCase
 
         $events[$event->getEventId()] = $event;
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
         $player = new Player($room);
 
-        $adventureEventManager->checkEvent("none", "none", $player);
+        $eventManager->checkEvent("none", "none", $player);
 
         $descriptions = $player->getCurrentRoom()->getTempDescriptions();
 

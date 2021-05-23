@@ -74,7 +74,7 @@ class RoomTest extends TestCase
     {
         $room = new Room("none", "none", "none", "none");
 
-        $room->setInventory(new Inventory);
+        $room->setInventory(new Inventory());
 
         $actualValue = $room->getInventory();
 

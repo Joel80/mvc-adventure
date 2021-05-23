@@ -66,7 +66,7 @@ class PlayerTest extends TestCase
 
         $player = new Player($room);
 
-        $player->setInventory(new Inventory);
+        $player->setInventory(new Inventory());
 
         $actualValue = $player->getInventory();
 

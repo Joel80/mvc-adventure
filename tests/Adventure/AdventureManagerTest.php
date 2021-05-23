@@ -33,8 +33,8 @@ class AdventureManagerTest extends TestCase
 
         $adventureData = new AdventureData();
 
-        $event = new Event("none", "none",  "none", $room, "none");
-        
+        $event = new Event("none", "none", "none", $room, "none");
+
         $events = [];
 
         $events[$event->getEventId()] = $event;
@@ -43,15 +43,15 @@ class AdventureManagerTest extends TestCase
 
         $map = new Map();
 
-        $achievementLog = new AchievementLog;
+        $achievementLog = new AchievementLog();
 
-        $roomVisitLog = new RoomVisitLog;
+        $roomVisitLog = new RoomVisitLog();
 
         $adventureDataSetter = new AdventureDataSetter($adventureData, $player);
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
-        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $adventureEventManager, $roomVisitLog);
+        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $eventManager, $roomVisitLog);
 
         $this->assertInstanceOf("\App\Adventure\AdventureManager", $adventureManager);
     }
@@ -67,8 +67,8 @@ class AdventureManagerTest extends TestCase
 
         $adventureData = new AdventureData();
 
-        $event = new Event("none", "none",  "none", $room, "none");
-        
+        $event = new Event("none", "none", "none", $room, "none");
+
         $events = [];
 
         $events[$event->getEventId()] = $event;
@@ -77,15 +77,15 @@ class AdventureManagerTest extends TestCase
 
         $map = new Map();
 
-        $achievementLog = new AchievementLog;
+        $achievementLog = new AchievementLog();
 
-        $roomVisitLog = new RoomVisitLog;
+        $roomVisitLog = new RoomVisitLog();
 
         $adventureDataSetter = new AdventureDataSetter($adventureData, $player);
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
-        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $adventureEventManager, $roomVisitLog);
+        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $eventManager, $roomVisitLog);
 
         $actualValue = $adventureManager->getAdventureDataSetter();
 
@@ -103,8 +103,8 @@ class AdventureManagerTest extends TestCase
 
         $adventureData = new AdventureData();
 
-        $event = new Event("none", "none",  "none", $room, "none");
-        
+        $event = new Event("none", "none", "none", $room, "none");
+
         $events = [];
 
         $events[$event->getEventId()] = $event;
@@ -113,15 +113,15 @@ class AdventureManagerTest extends TestCase
 
         $map = new Map();
 
-        $achievementLog = new AchievementLog;
+        $achievementLog = new AchievementLog();
 
-        $roomVisitLog = new RoomVisitLog;
+        $roomVisitLog = new RoomVisitLog();
 
         $adventureDataSetter = new AdventureDataSetter($adventureData, $player);
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
-        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $adventureEventManager, $roomVisitLog);
+        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $eventManager, $roomVisitLog);
 
         $actualValue = $adventureManager->getPlayer();
 
@@ -139,8 +139,8 @@ class AdventureManagerTest extends TestCase
 
         $adventureData = new AdventureData();
 
-        $event = new Event("none", "none",  "none", $room, "none");
-        
+        $event = new Event("none", "none", "none", $room, "none");
+
         $events = [];
 
         $events[$event->getEventId()] = $event;
@@ -149,15 +149,15 @@ class AdventureManagerTest extends TestCase
 
         $map = new Map();
 
-        $achievementLog = new AchievementLog;
+        $achievementLog = new AchievementLog();
 
-        $roomVisitLog = new RoomVisitLog;
+        $roomVisitLog = new RoomVisitLog();
 
         $adventureDataSetter = new AdventureDataSetter($adventureData, $player);
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
-        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $adventureEventManager, $roomVisitLog);
+        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $eventManager, $roomVisitLog);
 
         $actualValue = $adventureManager->getAchievementLog();
 
@@ -175,8 +175,8 @@ class AdventureManagerTest extends TestCase
 
         $adventureData = new AdventureData();
 
-        $event = new Event("none", "none",  "none", $room, "none");
-        
+        $event = new Event("none", "none", "none", $room, "none");
+
         $events = [];
 
         $events[$event->getEventId()] = $event;
@@ -185,15 +185,15 @@ class AdventureManagerTest extends TestCase
 
         $map = new Map();
 
-        $achievementLog = new AchievementLog;
+        $achievementLog = new AchievementLog();
 
-        $roomVisitLog = new RoomVisitLog;
+        $roomVisitLog = new RoomVisitLog();
 
         $adventureDataSetter = new AdventureDataSetter($adventureData, $player);
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
-        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $adventureEventManager, $roomVisitLog);
+        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $eventManager, $roomVisitLog);
 
         $actualValue = $adventureManager->getRoomVisitLog();
 
@@ -211,8 +211,8 @@ class AdventureManagerTest extends TestCase
 
         $adventureData = new AdventureData();
 
-        $event = new Event("none", "none",  "none", $room, "none");
-        
+        $event = new Event("none", "none", "none", $room, "none");
+
         $events = [];
 
         $events[$event->getEventId()] = $event;
@@ -221,15 +221,15 @@ class AdventureManagerTest extends TestCase
 
         $map = new Map();
 
-        $achievementLog = new AchievementLog;
+        $achievementLog = new AchievementLog();
 
-        $roomVisitLog = new RoomVisitLog;
+        $roomVisitLog = new RoomVisitLog();
 
         $adventureDataSetter = new AdventureDataSetter($adventureData, $player);
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
-        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $adventureEventManager, $roomVisitLog);
+        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $eventManager, $roomVisitLog);
 
         $actualValue = $adventureManager->getAdventureEventManager();
 
@@ -247,8 +247,8 @@ class AdventureManagerTest extends TestCase
 
         $adventureData = new AdventureData();
 
-        $event = new Event("none", "none",  "none", $room, "none");
-        
+        $event = new Event("none", "none", "none", $room, "none");
+
         $events = [];
 
         $events[$event->getEventId()] = $event;
@@ -257,19 +257,18 @@ class AdventureManagerTest extends TestCase
 
         $map = new Map();
 
-        $achievementLog = new AchievementLog;
+        $achievementLog = new AchievementLog();
 
-        $roomVisitLog = new RoomVisitLog;
+        $roomVisitLog = new RoomVisitLog();
 
         $adventureDataSetter = new AdventureDataSetter($adventureData, $player);
 
-        $adventureEventManager = new AdventureEventManager($events, $achievement);
+        $eventManager = new AdventureEventManager($events, $achievement);
 
-        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $adventureEventManager, $roomVisitLog);
+        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $achievementLog, $eventManager, $roomVisitLog);
 
         $actualValue = $adventureManager->getMap();
 
         $this->assertInstanceOf("\App\Adventure\Map", $actualValue);
     }
-
 }

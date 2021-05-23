@@ -109,8 +109,8 @@ class AdventureSetupTest extends TestCase
 
         $eventDescriptors = [$eventDescriptor];
 
-        $actualValue = $adventureSetup->setup(new AchievementLog(), $roomDescriptors, $itemDescriptors, $exitDescriptors, $eventDescriptors, new RoomVisitLog());
+        $actualValue = $adventureSetup->setup($roomDescriptors, $itemDescriptors, $exitDescriptors, $eventDescriptors);
 
-        $this->assertInstanceOf("\App\Adventure\AdventureManager", $actualValue);
+        $this->assertIsArray($actualValue);
     }
 }
