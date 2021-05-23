@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}Escape from Vault{% endblock %}
+{% block title %}Escape from the Vault{% endblock %}
 {% block body %}
 
 <div class="game-grid">
@@ -29,8 +29,8 @@
 
         {% for item in data['playerRoomItems']%}
             <form method="post" action="{{ path('app_adventure_pick')}}">
-                <!-- <input type="text" name="itemPlacementDescription" value="{{item['placementDescription']}}" readonly> -->
-                <label for="itemPlacementDescription" >{{item['placementDescription']}}</label>
+                <!-- <input type="text" name="itemPlacement" value="{{item['placementDescription']}}" readonly> -->
+                <label for="itemPlacement" >{{item['placementDescription']}}</label>
                 <input type="hidden" name="itemId" value="{{item['id']}}" readonly>
                 <input type="submit" name="doit" value="Pick up">
             </form>
