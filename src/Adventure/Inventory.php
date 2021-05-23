@@ -33,8 +33,8 @@ class Inventory
 
     /**
      * Add an items
-     * @param Item the item
-     * @param string $itemId 
+     * @param Item $item the item
+     * @param string $itemId the item id
      * @return void
      */
     public function addItem(Item $item, string $itemId): void

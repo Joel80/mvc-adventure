@@ -147,7 +147,7 @@ class Room
     {
         return $this->roomIndex;
     }
-    
+
     /**
      * Sets the room image url
      * @param string $imageUrl the url to the image

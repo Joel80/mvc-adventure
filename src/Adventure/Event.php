@@ -82,7 +82,7 @@ class Event
     }
 
     /**
-     * Gets the event 
+     * Gets the event
      * @return Room the event room
      */
     public function getEventRoom(): Room
@@ -119,7 +119,7 @@ class Event
 
     /**
      * Sets the room the exit is in
-     * @param Room|null the room description
+     * @param Room|null $exitIsIn the room the exit is in
      * @return void
      */
     public function setExitIsIn(?Room $exitIsIn): void
@@ -131,7 +131,7 @@ class Event
      * Gets the passed flag
      * @return bool the flag
      */
-    public function getPassed(): bool
+    public function hasPassed(): bool
     {
         return $this->passed;
     }

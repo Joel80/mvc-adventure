@@ -38,7 +38,7 @@ class AdventureEventManager
 
     /**
      * Sets last achievement
-     * @param Achievement|null
+     * @param Achievement|null $achievement the last achievement
      */
     public function setLastAchievement(?Achievement $achievement)
     {
@@ -71,7 +71,7 @@ class AdventureEventManager
 
         $event = $this->events[$eventString];
 
-        $passed = $event->getPassed();
+        $passed = $event->hasPassed();
 
         if ($passed) {
             $this->executeEventNone($player);

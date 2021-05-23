@@ -26,13 +26,14 @@ class AdventureManagerCreator
      * Constructor
      */
     public function __construct()
-    {}
+    {
+    }
 
     /**
      * Creates the adventure manager
      * @param array $setupObjects contains map and events
      * @param RoomVisitLog $roomVisitLog the games room visit log
-     * @param AchievementLog $achievementLog the games achievement log
+     * @param AchievementLog $adventureLog the games achievement log
      * @return AdventureManager
      */
     public function createAdventureManager(array $setupObjects, RoomVisitLog $roomVisitLog, AchievementLog $adventureLog): AdventureManager

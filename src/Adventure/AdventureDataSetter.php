@@ -213,7 +213,7 @@ class AdventureDataSetter
 
     /**
      * Gets the data from AdventureData
-     * @return void
+     * @return array with the data
      */
     public function getAdventureData(): array
     {

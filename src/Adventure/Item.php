@@ -24,7 +24,7 @@ class Item
      * @param string $description the item description
      * @param string $name the name of the item
      * @param string $itemId the item id
-     * @param string $placementDescription the description of the items placement
+     * @param string $itemPlacement the description of the items placement
      */
     public function __construct(string $description, string $name, string $itemId, string $itemPlacement)
     {

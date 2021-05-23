@@ -43,7 +43,7 @@ class Player
 
     /**
      * Sets the players inventory
-     * @param Inventory $inventoryt the players new inventory
+     * @param Inventory $inventory the players new inventory
      * @return void
      */
     public function setInventory(Inventory $inventory): void

@@ -41,7 +41,7 @@ class AdventureManager
      * @param AchievementLog $achievementLog holds the achievementLog
      * @param RoomVisitLog $roomVisitLog holds the roomvisitLog
      * @param AdventureEventManager $eventManager holds the eventmanager
-     * @param AdventureDataSetter $dataSetter holds the games datasetter
+     * @param AdventureDataSetter $adventureDataSetter holds the games datasetter
      */
     public function __construct(Player $player, AdventureDataSetter $adventureDataSetter, Map $map, AchievementLog $achievementLog, AdventureEventManager $eventManager, RoomVisitLog $roomVisitLog)
     {

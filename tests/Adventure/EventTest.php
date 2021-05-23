@@ -136,7 +136,7 @@ class EventTest extends TestCase
     }
 
     /**
-     * Test the getPassed (setPassed) methods
+     * Test the hasPassed (setPassed) methods
      */
     public function testEventGetSetPassed()
     {
@@ -146,7 +146,7 @@ class EventTest extends TestCase
 
         $event->setPassed(true);
 
-        $actualValue = $event->getPassed();
+        $actualValue = $event->hasPassed();
 
         $this->assertTrue($actualValue);
     }

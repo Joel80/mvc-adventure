@@ -1,5 +1,7 @@
 <?php
 
+/*
+
 declare(strict_types=1);
 
 namespace App\DataFixtures;
@@ -21,7 +23,7 @@ class GameEventFixtures extends Fixture implements FixtureGroupInterface
     }
 
     public function load(ObjectManager $manager)
-    {
+    { */
         /* $eventDescriptor = new EventDescriptor();
         $eventDescriptor->setEvent("idCard&roomOne");
         $eventDescriptor->setDescription("You put the ID card in the slot by the door and the giant door swings open.");
@@ -83,5 +85,8 @@ class GameEventFixtures extends Fixture implements FixtureGroupInterface
         $manager->persist($eventDescriptor);
 
         $manager->flush(); */
+
+/*
     }
 }
+ */

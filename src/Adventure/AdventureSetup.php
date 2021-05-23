@@ -44,7 +44,7 @@ class AdventureSetup
      * @param array $itemDescriptors the descriptors for the items
      * @param array $exitDescriptors the descriptors for the exits
      * @param array $eventDescriptors the descriptors for the events
-     * 
+     *
      * @return array $setupObjects holds the map and events
      */
     public function setup(array $roomDescriptors, array $itemDescriptors, array $exitDescriptors, array $eventDescriptors): array

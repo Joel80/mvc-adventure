@@ -1,5 +1,6 @@
 <?php
 
+/*
 declare(strict_types=1);
 
 namespace App\DataFixtures;
@@ -21,7 +22,7 @@ class GameExitFixtures extends Fixture implements FixtureGroupInterface
     }
 
     public function load(ObjectManager $manager)
-    {
+    { */
         /* $exitDescriptor = new ExitDescriptor();
         $exitDescriptor->setLeadsToRoom("roomOne");
         $exitDescriptor->setLocatedInRoom("roomTwo");
@@ -65,5 +66,6 @@ class GameExitFixtures extends Fixture implements FixtureGroupInterface
         $manager->persist($exitDescriptor);
 
         $manager->flush(); */
-    }
+ /*    }
 }
+ */

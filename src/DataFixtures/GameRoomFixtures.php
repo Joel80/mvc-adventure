@@ -1,5 +1,6 @@
 <?php
 
+/*
 declare(strict_types=1);
 
 namespace App\DataFixtures;
@@ -22,7 +23,7 @@ class GameRoomFixtures extends Fixture implements FixtureGroupInterface
 
     public function load(ObjectManager $manager)
     {
-
+ */
         /* $roomDescriptor = new RoomDescriptor();
         $roomDescriptor->setDescription('You are in in a room filled with debris. Beds, desks and overturned chairs litter the room. Severed cables hangs from the ceiling. Red flashing emergency light fills the room and you can see a small locker in one corner of the room. The locker door is slightly ajar but seems jammed. To the north is a great door, it is shut and seems impossible to open by force. On the floor in front of the door lies a fallen exit sign. There is a small slot next to the door.');
         $roomDescriptor->setRoomIndex("roomOne");
@@ -66,5 +67,6 @@ class GameRoomFixtures extends Fixture implements FixtureGroupInterface
         $manager->persist($roomDescriptor);
 
         $manager->flush(); */
-    }
+ /*    }
 }
+ */

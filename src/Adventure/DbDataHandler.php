@@ -21,7 +21,7 @@ use DateTime;
 class DbDataHandler
 {
     /**
-     * @var $entityManager holds an instance of entitymanager
+     * @var EntityManagerInterface $entityManager holds an instance of entitymanager
      */
     private $entityManager;
 

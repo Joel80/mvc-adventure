@@ -1,5 +1,6 @@
 <?php
 
+/*
 declare(strict_types=1);
 
 namespace App\DataFixtures;
@@ -21,7 +22,7 @@ class GameItemFixtures extends Fixture implements FixtureGroupInterface
     }
 
     public function load(ObjectManager $manager)
-    {
+    { */
         /* $itemDescriptor = new ItemDescriptor();
         $itemDescriptor->setDescription("An ID card");
         $itemDescriptor->setName("ID card");
@@ -55,5 +56,5 @@ class GameItemFixtures extends Fixture implements FixtureGroupInterface
         $manager->persist($itemDescriptor);
 
         $manager->flush(); */
-    }
-}
+/*     }
+} */
