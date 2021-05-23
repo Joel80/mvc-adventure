@@ -82,6 +82,9 @@ phpstan: prepare
 
 phpunit: prepare
 	php bin/console cache:clear --env=test
+	php bin/console --env=test doctrine:database:create
+	php bin/console --env=test doctrine:schema:update --force
+	php bin/console --env=test doctrine:fixtures:load --group=TestFixtures --no-interaction
 	[ ! -d "tests" ] || XDEBUG_MODE=coverage $(PHPUNIT) --configuration phpunit.xml.dist $(options) | tee build/phpunit
 
 cs: phpcs
