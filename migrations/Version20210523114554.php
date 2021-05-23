@@ -20,7 +20,7 @@ final class Version20210523114554 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE achievement (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, achievement_log_id INTEGER DEFAULT NULL, description VARCHAR(255) NOT NULL)');
+        $this->addSql('CREATE TABLE achievement (id INTEGER PRIMARY KEY AUTO_INCEMENT NOT NULL, achievement_log_id INTEGER DEFAULT NULL, description VARCHAR(255) NOT NULL)');
         $this->addSql('CREATE INDEX IDX_96737FF1D70101B ON achievement (achievement_log_id)');
         $this->addSql('CREATE TABLE achievement_log (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, date DATE NOT NULL, player_name VARCHAR(255) DEFAULT NULL)');
         $this->addSql('CREATE TABLE event_descriptor (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, event VARCHAR(255) NOT NULL, description VARCHAR(500) NOT NULL, room_description VARCHAR(2000) NOT NULL, add_exit BOOLEAN NOT NULL, exit_leads_to VARCHAR(255) DEFAULT NULL, exit_is_in_room VARCHAR(255) DEFAULT NULL, exit_name VARCHAR(255) DEFAULT NULL, event_room VARCHAR(255) NOT NULL, achievement VARCHAR(255) DEFAULT NULL)');
