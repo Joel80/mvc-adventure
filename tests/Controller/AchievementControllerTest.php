@@ -29,7 +29,7 @@ class AchievementControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $crawler = $client->request('GET', "/log/all");
-        $link = $crawler->selectLink('Show events')->link();
+        $link = $crawler->selectLink('Show achievements')->link();
         $client->click($link);
 
         $this->assertResponseIsSuccessful();
