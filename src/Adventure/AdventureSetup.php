@@ -22,30 +22,32 @@ use App\Entity\Visit;
 
 class AdventureSetup
 {
-    public function __construct()
-    {}
+    private array $setupObjects;
 
-    public function setup(AchievementLog $adventureLog, array $roomDescriptors, array $itemDescriptors, array $exitDescriptors, array $eventDescriptors, RoomVisitLog $roomVisitLog): AdventureManager
+    public function __construct()
+    {
+        $this->setupObjects = [];
+    }
+
+    public function setup(array $roomDescriptors, array $itemDescriptors, array $exitDescriptors, array $eventDescriptors): array
     {
         //Create map
         $map = new Map();
 
         //Create rooms
         foreach ($roomDescriptors as $roomDescriptor) {
-
             $roomDescription = $roomDescriptor->getDescription();
             $roomIndex = $roomDescriptor->getRoomIndex();
             $roomImage = $roomDescriptor->getRoomImage();
             $roomName = $roomDescriptor->getRoomName();
             $room = new Room($roomDescription, $roomIndex, $roomImage, $roomName);
-            $room->setInventory(new Inventory);
+            $room->setInventory(new Inventory());
 
             $map->addRoom($room, $roomIndex);
         }
 
         //Add inventories to rooms
         foreach ($itemDescriptors as $itemDescriptor) {
-
             $description = $itemDescriptor->getDescription();
             $name = $itemDescriptor->getName();
             $itemId = $itemDescriptor->getItemId();
@@ -60,13 +62,12 @@ class AdventureSetup
 
         //Add exits to rooms
         foreach ($exitDescriptors as $exitDescriptor) {
-
             $leadsToRoom = $exitDescriptor->getLeadsToRoom();
             $locatedInRoom = $exitDescriptor->getLocatedInRoom();
             $name = $exitDescriptor->getName();
-            
+
             $roomContaining = $map->getRoom($locatedInRoom);
-            
+
             $roomLeadsTo = $map->getRoom($leadsToRoom);
 
             $exit = new RoomExit($roomLeadsTo, $name);
@@ -79,7 +80,6 @@ class AdventureSetup
         $events = [];
 
         foreach ($eventDescriptors as $eventDescriptor) {
-
             $eventId = $eventDescriptor->getEvent();
             $description = $eventDescriptor->getDescription();
             $roomDescription = $eventDescriptor->getRoomDescription();
@@ -111,27 +111,10 @@ class AdventureSetup
             $events[$eventId] = $event;
         }
 
-        //Create achievementholder for AdventureEventManager
-        $achievementHolder = new Achievement();
+        $this->setupObjects[] = $map;
 
-        //Create player
-        $player = new Player($map->getRoom("roomOne"));
+        $this->setupObjects[] = $events;
 
-        $playerInventory = new Inventory();
-
-        $player->setInventory($playerInventory);
-
-        //Create adventureData
-        $adventureData = new AdventureData();
-
-        $adventureDataSetter = new AdventureDataSetter($adventureData, $player);
-
-        //Create adventuerEventManager
-        $eventManager = new AdventureEventManager($events, $achievementHolder);
-
-        //Create and return adventureManager
-        $adventureManager = new AdventureManager($player, $adventureDataSetter, $map, $adventureLog, $eventManager, $roomVisitLog);
-
-        return $adventureManager;
+        return $this->setupObjects;
     }
 }
