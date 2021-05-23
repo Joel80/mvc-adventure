@@ -3,7 +3,12 @@
 {% block title %}Adventure logs{% endblock %}
 
 {% block body %}
-    <h2>Adventure logs</h2>
+    <h2>Achievement logs</h2>
+    <p>
+        Click on "Show achievements" by your game 
+        to see the achievements you have accomplished
+        during your escape from the vault.
+    </p>
     <table class="log-table">
         <tr>
             <th>Log number</th>
@@ -16,7 +21,7 @@
             <td>{{log.id}}</td>
                 <td>{{ log.date|date('Y-m-d')}}</td>
                 <td>{{ log.playerName }}</td>
-                <td><a href="{{ path('app_show_events',  {'id': log.id}) }}">Show events</a></td>
+                <td><a href="{{ path('app_show_events',  {'id': log.id}) }}">Show achievements</a></td>
             </tr>
         {% endfor %}
     </table>

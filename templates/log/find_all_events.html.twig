@@ -3,7 +3,11 @@
 {% block title %}Events{% endblock %}
 
 {% block body %}
-<h2>Your acomplishments</h2>
+<h2>Your achievements</h2>
+<p>
+    These are the achievements you have accomplished during 
+    your escape from the vault.
+</p>
 {% for event in events %}
     <ul>
         <li>{{ event.description }}</li>

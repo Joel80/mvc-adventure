@@ -3,9 +3,12 @@
 {% block title %}Room Visits{% endblock %}
 
 {% block body %}
-<h2>You visited these rooms</h2>
+<h2>You have visited these rooms</h2>
+<p>
+    Here you can see how many times you have entered the different rooms in the vault. 
+    You get one * each time you enter a room. Can you escape with as few * as possible?
+</p>
 {% for visit in visits %}
-
 <p>
     {{ visit.roomName }}
     {# {{ visit.timesVisited }} #}

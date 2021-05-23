@@ -4,12 +4,17 @@
 
 {% block body %}
     <h2>Room Visits Logs</h2>
+    <p>
+        Click on "Show visits" by your game 
+        to see how many times you entered the 
+        rooms of the vault during your escape.
+    </p>
     <table class="log-table">
         <tr>
             <th>Log number</th>
             <th>Date</th>
             <th>Player</th>
-            <th>Show events</th>
+            <th>Show visits</th>
         </tr>
         {% for log in logs %}
             <tr>
