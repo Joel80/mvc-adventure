@@ -56,7 +56,11 @@ class AdventureController extends AbstractController
 
             $logId = $adventureManager->getAchievementLog()->getId();
 
-            $log = $entityManager->getReference('App\Entity\AchievementLog', $logId);
+            $log = $this->getDoctrine()
+            ->getRepository(AchievementLog::class)
+            ->find($logId);
+
+            //$log = $entityManager->getReference('App\Entity\AchievementLog', $logId);
 
             $lastAchievement->setAchievementLog($log);
 
